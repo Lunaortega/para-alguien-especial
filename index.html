@@ -16,55 +16,177 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background: linear-gradient(135deg, #2b1055, #7597de);
+            /* Fondo galáctico con estrellas */
+            background: radial-gradient(circle at center, #1b2735 0%, #090a0f 100%);
             font-family: 'Georgia', serif;
             color: #fff;
             overflow-x: hidden;
             padding: 20px;
+            position: relative;
         }
 
+        /* Estrellas de fondo animadas */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
+                radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px);
+            background-size: 550px 550px, 350px 350px, 250px 250px;
+            background-position: 0 0, 40px 60px, 130px 270px;
+            opacity: 0.8;
+            animation: starsMove 60s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes starsMove {
+            from { background-position: 0 0, 40px 60px, 130px 270px; }
+            to { background-position: 550px 550px, 390px 410px, 380px 820px; }
+        }
+
+        /* Contenedor del Astronauta y el Globo */
+        .space-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-top: 140px; /* Espacio para el astronauta flotante de arriba */
+            z-index: 2;
+        }
+
+        /* Astronauta Flotando */
+        .astronaut-wrapper {
+            position: absolute;
+            top: -150px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: floatAstronaut 4s ease-in-out infinite;
+        }
+
+        /* Icono de Astronauta */
+        .astronaut {
+            width: 70px;
+            height: 70px;
+        }
+
+        /* Globo de corazón */
+        .balloon-container {
+            position: absolute;
+            top: -65px;
+            right: -25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: floatBalloon 3s ease-in-out infinite alternate;
+        }
+
+        .heart-balloon {
+            background-color: #ff3860;
+            display: inline-block;
+            height: 50px;
+            position: relative;
+            top: 0;
+            transform: rotate(-45deg);
+            width: 50px;
+            border-radius: 50% 50% 0 0;
+            box-shadow: 0 0 15px rgba(255, 56, 96, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .heart-balloon:before {
+            content: "";
+            background-color: #ff3860;
+            border-radius: 50% 50% 0 0;
+            height: 50px;
+            position: absolute;
+            width: 50px;
+            top: 0;
+            left: 25px;
+        }
+
+        .heart-balloon span {
+            transform: rotate(45deg);
+            color: white;
+            font-size: 0.65rem;
+            font-weight: bold;
+            z-index: 10;
+            position: relative;
+            white-space: nowrap;
+            font-family: 'Arial', sans-serif;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            margin-left: 20px;
+            margin-top: -20px;
+        }
+
+        .balloon-string {
+            width: 2px;
+            height: 50px;
+            background: rgba(255,255,255,0.5);
+            margin-top: 15px;
+            transform: rotate(15deg);
+        }
+
+        /* Carta principal */
         .card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(10, 15, 30, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             padding: 40px 30px;
             border-radius: 20px;
             text-align: center;
-            max-width: 500px;
             width: 100%;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
             animation: fadeIn 2s ease-in-out;
         }
 
-        h1 {
-            font-size: 2.2rem;
-            color: #ffd700; /* Color oro */
-            margin-bottom: 20px;
+        /* Título Estilo Pergamino */
+        .parchment-title {
+            background: linear-gradient(135deg, #f4e4c4, #e4cb95);
+            color: #4a3319;
+            padding: 10px 25px;
+            font-size: 2rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            border-radius: 4px;
+            display: inline-block;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3), inset 0 0 10px rgba(74,51,25,0.2);
+            border-left: 6px solid #b8860b;
+            border-right: 6px solid #b8860b;
+            font-family: 'Times New Roman', serif;
+            margin-bottom: 5px;
+            position: relative;
+        }
+
+        /* Subtítulo */
+        .subtitle {
+            font-size: 1.1rem;
+            color: #e4cb95;
             font-style: italic;
+            margin-bottom: 25px;
+            opacity: 0.9;
         }
 
         .poem {
             font-size: 1.2rem;
             line-height: 1.8;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             color: #f0f0f0;
-            white-space: pre-line; /* Mantiene los saltos de línea del poema */
+            white-space: pre-line;
         }
 
         .highlight {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: bold;
-            color: #ff6b81; /* Rosa romántico */
+            color: #ff6b81;
             display: block;
             margin-top: 15px;
             animation: pulse 2s infinite;
-        }
-
-        .heart {
-            font-size: 40px;
-            color: #ff6b81;
-            margin-top: 20px;
-            animation: heartbeat 1.2s infinite;
         }
 
         /* Animaciones */
@@ -73,37 +195,59 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes heartbeat {
-            0% { transform: scale(1); }
-            20% { transform: scale(1.1); }
-            40% { transform: scale(1.05); }
-            60% { transform: scale(1.15); }
-            80% { transform: scale(1); }
-            100% { transform: scale(1); }
+        @keyframes floatAstronaut {
+            0% { transform: translate(-50%, 0px); }
+            50% { transform: translate(-50%, -12px); }
+            100% { transform: translate(-50%, 0px); }
+        }
+
+        @keyframes floatBalloon {
+            0% { transform: translateY(0px) rotate(0deg); }
+            100% { transform: translateY(-5px) rotate(3deg); }
         }
 
         @keyframes pulse {
-            0% { opacity: 0.8; }
-            50% { opacity: 1; text-shadow: 0 0 10px rgba(255, 107, 129, 0.5); }
-            100% { opacity: 0.8; }
+            0% { opacity: 0.8; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); text-shadow: 0 0 15px rgba(255, 107, 129, 0.7); }
+            100% { opacity: 0.8; transform: scale(1); }
         }
     </style>
 </head>
 <body>
 
-    <div class="card">
-        <h1>Para una dama hermosa</h1>
-        
-        <p class="poem">
-            Entre destellos de luz y mil estrellas,
-            tu sonrisa resalta, la más bella.
-            No hay paisaje, ni obra de arte,
-            que se compare al arte de mirarte.
+    <div class="space-container">
+        <div class="astronaut-wrapper">
+            <svg class="astronaut" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="32" cy="25" r="16" fill="#e6e6e6"/>
+                <rect x="22" y="19" width="20" height="12" rx="6" fill="#2d3748"/>
+                <rect x="25" y="21" width="14" height="8" rx="4" fill="#63b3ed" opacity="0.7"/>
+                <rect x="18" y="41" width="28" height="20" rx="10" fill="#e6e6e6"/>
+                <rect x="24" y="46" width="14" height="6" fill="#a0aec0"/>
+                <circle cx="14" cy="45" r="4" fill="#cbd5e0"/>
+                <circle cx="50" cy="45" r="4" fill="#cbd5e0"/>
+            </svg>
             
-            <span class="highlight">¡Me encantas!</span>
-        </p>
+            <div class="balloon-container">
+                <div class="heart-balloon">
+                    <span>Te quiero</span>
+                </div>
+                <div class="balloon-string"></div>
+            </div>
+        </div>
 
-        <div class="heart">❤</div>
+        <div class="card">
+            <div class="parchment-title">05072026</div>
+            <div class="subtitle">Un solo para ti preciosa mia</div>
+            
+            <p class="poem">
+                Entre destellos de luz y mil estrellas,
+                tu sonrisa resalta, la más bella.
+                No hay paisaje, ni obra de arte,
+                que se compare al arte de mirarte.
+                
+                <span class="highlight">¡Me encantas!</span>
+            </p>
+        </div>
     </div>
 
 </body>
