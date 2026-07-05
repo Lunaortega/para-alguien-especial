@@ -1,220 +1,213 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para una dama hermosa</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para una dama hermosa</title>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
 
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: radial-gradient(circle at center, #1b2735 0%, #050608 100%);
-            font-family: 'Georgia', serif;
-            color: #fff;
-            overflow-x: hidden;
-            padding: 20px;
-            position: relative;
-        }
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background: radial-gradient(ellipse at bottom, #0b1a2a 0%, #000 100%);
+    overflow:hidden;
+    font-family:'Georgia', serif;
+    color:white;
+}
 
-        /* Estrellas animadas */
-        body::before {
-            content: "";
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
-                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
-                radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px);
-            background-size: 600px 600px, 400px 400px, 300px 300px;
-            animation: starsMove 80s linear infinite;
-            opacity: 0.7;
-        }
+/* 🌌 GALAXIA PRO */
+body::before{
+    content:"";
+    position:absolute;
+    width:200%;
+    height:200%;
+    background:
+        radial-gradient(white 1px, transparent 1px),
+        radial-gradient(white 2px, transparent 2px),
+        radial-gradient(rgba(255,255,255,.5) 1px, transparent 1px);
+    background-size: 100px 100px, 200px 200px, 300px 300px;
+    animation: stars 120s linear infinite;
+    opacity:0.6;
+}
 
-        @keyframes starsMove {
-            from { background-position: 0 0; }
-            to { background-position: 800px 800px; }
-        }
+@keyframes stars{
+    from{transform:translate(0,0);}
+    to{transform:translate(-500px,-500px);}
+}
 
-        .space-container {
-            position: relative;
-            width: 100%;
-            max-width: 500px;
-            margin-top: 140px;
-            z-index: 2;
-        }
+/* 🌌 NEBULOSA */
+body::after{
+    content:"";
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:
+    radial-gradient(circle at 30% 30%, rgba(255,0,150,0.2), transparent 40%),
+    radial-gradient(circle at 70% 60%, rgba(0,200,255,0.2), transparent 40%);
+    filter: blur(80px);
+}
 
-        /* Astronauta */
-        .astronaut-wrapper {
-            position: absolute;
-            top: -150px;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: floatAstronaut 4s ease-in-out infinite;
-        }
+/* CONTENEDOR */
+.container{
+    position:relative;
+    z-index:2;
+}
 
-        .astronaut {
-            width: 75px;
-            filter: drop-shadow(0 0 10px rgba(255,255,255,0.4));
-        }
+/* 👨‍🚀 ASTRONAUTA */
+.astronaut{
+    position:absolute;
+    top:-160px;
+    left:50%;
+    transform:translateX(-50%);
+    animation: float 4s ease-in-out infinite;
+    filter: drop-shadow(0 0 15px rgba(255,255,255,0.6));
+}
 
-        /* Globo */
-        .balloon-container {
-            position: absolute;
-            top: -65px;
-            right: -25px;
-            animation: floatBalloon 3s ease-in-out infinite alternate;
-        }
+/* GLOBO */
+.balloon{
+    position:absolute;
+    right:-30px;
+    top:-70px;
+    animation: floatBalloon 3s ease-in-out infinite alternate;
+}
 
-        .heart-balloon {
-            background-color: #ff3860;
-            height: 50px;
-            width: 50px;
-            position: relative;
-            transform: rotate(-45deg);
-            border-radius: 50% 50% 0 0;
-            box-shadow: 0 0 20px rgba(255, 56, 96, 0.8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+.heart{
+    width:60px;
+    height:60px;
+    background:#ff3b6b;
+    transform: rotate(-45deg);
+    position:relative;
+    box-shadow:0 0 25px #ff3b6b;
+}
 
-        .heart-balloon:before {
-            content: "";
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            background-color: #ff3860;
-            border-radius: 50%;
-            left: 25px;
-            top: 0;
-        }
+.heart::before,
+.heart::after{
+    content:"";
+    position:absolute;
+    width:60px;
+    height:60px;
+    background:#ff3b6b;
+    border-radius:50%;
+}
 
-        .heart-balloon span {
-            transform: rotate(45deg);
-            font-size: 0.7rem;
-            font-weight: bold;
-            text-shadow: 0 0 5px black;
-        }
+.heart::before{top:-30px;left:0;}
+.heart::after{left:30px;top:0;}
 
-        .balloon-string {
-            width: 2px;
-            height: 50px;
-            background: rgba(255,255,255,0.6);
-            margin-top: 15px;
-        }
+.heart span{
+    position:absolute;
+    transform: rotate(45deg);
+    top:20px;
+    left:8px;
+    font-size:0.7rem;
+    font-weight:bold;
+}
 
-        /* Carta */
-        .card {
-            background: rgba(10, 15, 30, 0.75);
-            backdrop-filter: blur(15px);
-            border-radius: 20px;
-            padding: 40px 30px;
-            text-align: center;
-            box-shadow: 0 0 40px rgba(0,0,0,0.9);
-            border: 1px solid rgba(255,255,255,0.2);
-            animation: fadeIn 2s ease;
-        }
+.string{
+    width:2px;
+    height:60px;
+    background:white;
+    margin:auto;
+}
 
-        /* Título */
-        .parchment-title {
-            background: linear-gradient(135deg, #f4e4c4, #e4cb95);
-            color: #4a3319;
-            padding: 10px 25px;
-            font-size: 2rem;
-            font-weight: bold;
-            letter-spacing: 2px;
-            border-radius: 6px;
-            display: inline-block;
-            box-shadow: 0 0 15px rgba(255,255,255,0.3);
-            margin-bottom: 10px;
-        }
+/* TARJETA PRO */
+.card{
+    backdrop-filter: blur(20px);
+    background: rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.2);
+    border-radius:20px;
+    padding:40px;
+    width:320px;
+    text-align:center;
+    box-shadow:0 0 50px rgba(0,0,0,0.8);
+    animation: fade 2s ease;
+}
 
-        /* Subtítulo corregido */
-        .subtitle {
-            font-size: 1.1rem;
-            color: #e4cb95;
-            font-style: italic;
-            margin-bottom: 25px;
-        }
+/* TEXTO */
+.title{
+    font-size:2rem;
+    margin-bottom:10px;
+    color:#ffd89b;
+    text-shadow:0 0 10px #ffd89b;
+}
 
-        .poem {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            white-space: pre-line;
-        }
+.subtitle{
+    font-style:italic;
+    margin-bottom:20px;
+    color:#ccc;
+}
 
-        .highlight {
-            font-size: 1.7rem;
-            font-weight: bold;
-            color: #ff6b81;
-            display: block;
-            margin-top: 15px;
-            animation: glow 2s infinite;
-        }
+.poem{
+    line-height:1.8;
+    white-space:pre-line;
+}
 
-        /* Animaciones */
-        @keyframes fadeIn {
-            from {opacity: 0; transform: translateY(20px);}
-            to {opacity: 1; transform: translateY(0);}
-        }
+.highlight{
+    color:#ff6b81;
+    font-size:1.6rem;
+    font-weight:bold;
+    animation: glow 2s infinite;
+}
 
-        @keyframes floatAstronaut {
-            0%,100% { transform: translate(-50%, 0); }
-            50% { transform: translate(-50%, -15px); }
-        }
+/* ANIMACIONES */
+@keyframes float{
+    0%,100%{transform:translate(-50%,0);}
+    50%{transform:translate(-50%,-15px);}
+}
 
-        @keyframes floatBalloon {
-            from { transform: translateY(0); }
-            to { transform: translateY(-8px); }
-        }
+@keyframes floatBalloon{
+    from{transform:translateY(0);}
+    to{transform:translateY(-10px);}
+}
 
-        @keyframes glow {
-            0%,100% { text-shadow: 0 0 10px #ff6b81; }
-            50% { text-shadow: 0 0 25px #ff6b81; }
-        }
-    </style>
+@keyframes glow{
+    0%,100%{text-shadow:0 0 10px #ff6b81;}
+    50%{text-shadow:0 0 30px #ff6b81;}
+}
+
+@keyframes fade{
+    from{opacity:0;transform:translateY(20px);}
+    to{opacity:1;}
+}
+</style>
 </head>
 
 <body>
 
-<div class="space-container">
+<div class="container">
 
-    <div class="astronaut-wrapper">
-        <svg class="astronaut" viewBox="0 0 64 64">
+    <!-- 👨‍🚀 -->
+    <div class="astronaut">
+        <svg width="90" viewBox="0 0 64 64">
             <circle cx="32" cy="25" r="16" fill="#e6e6e6"/>
             <rect x="22" y="19" width="20" height="12" rx="6" fill="#2d3748"/>
-            <rect x="25" y="21" width="14" height="8" rx="4" fill="#63b3ed" opacity="0.7"/>
+            <rect x="25" y="21" width="14" height="8" rx="4" fill="#63b3ed"/>
             <rect x="18" y="41" width="28" height="20" rx="10" fill="#e6e6e6"/>
         </svg>
 
-        <div class="balloon-container">
-            <div class="heart-balloon"><span>Te quiero</span></div>
-            <div class="balloon-string"></div>
+        <!-- 🎈 -->
+        <div class="balloon">
+            <div class="heart"><span>Te quiero</span></div>
+            <div class="string"></div>
         </div>
     </div>
 
+    <!-- 💌 -->
     <div class="card">
-        <div class="parchment-title">05·07·2026</div>
+        <div class="title">05·07·2026</div>
         <div class="subtitle">Un susurro solo para ti, preciosa mía</div>
 
-        <p class="poem">
+        <div class="poem">
 Entre destellos de luz y mil estrellas,
 tu sonrisa resalta, la más bella.
 No hay paisaje, ni obra de arte,
 que se compare al arte de mirarte.
 
 <span class="highlight">¡Me encantas!</span>
-        </p>
+        </div>
     </div>
 
 </div>
