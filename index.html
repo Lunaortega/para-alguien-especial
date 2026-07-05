@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para una dama hermosa</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #2b1055, #7597de);
+            font-family: 'Georgia', serif;
+            color: #fff;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            color: #ffd700; /* Color oro */
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .poem {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            color: #f0f0f0;
+            white-space: pre-line; /* Mantiene los saltos de línea del poema */
+        }
+
+        .highlight {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ff6b81; /* Rosa romántico */
+            display: block;
+            margin-top: 15px;
+            animation: pulse 2s infinite;
+        }
+
+        .heart {
+            font-size: 40px;
+            color: #ff6b81;
+            margin-top: 20px;
+            animation: heartbeat 1.2s infinite;
+        }
+
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            20% { transform: scale(1.1); }
+            40% { transform: scale(1.05); }
+            60% { transform: scale(1.15); }
+            80% { transform: scale(1); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.8; }
+            50% { opacity: 1; text-shadow: 0 0 10px rgba(255, 107, 129, 0.5); }
+            100% { opacity: 0.8; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>Para una dama hermosa</h1>
+        
+        <p class="poem">
+            Entre destellos de luz y mil estrellas,
+            tu sonrisa resalta, la más bella.
+            No hay paisaje, ni obra de arte,
+            que se compare al arte de mirarte.
+            
+            <span class="highlight">¡Me encantas!</span>
+        </p>
+
+        <div class="heart">❤</div>
+    </div>
+
+</body>
+</html>
