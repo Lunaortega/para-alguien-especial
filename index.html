@@ -13,42 +13,55 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
-    background: radial-gradient(ellipse at bottom, #0b1a2a 0%, #000 100%);
+    background:#000;
     overflow:hidden;
     font-family:'Georgia', serif;
     color:white;
 }
 
-/* 🌌 GALAXIA PRO */
-body::before{
-    content:"";
+/* 🌌 FONDO PARALLAX */
+.bg{
     position:absolute;
     width:200%;
     height:200%;
     background:
         radial-gradient(white 1px, transparent 1px),
-        radial-gradient(white 2px, transparent 2px),
-        radial-gradient(rgba(255,255,255,.5) 1px, transparent 1px);
-    background-size: 100px 100px, 200px 200px, 300px 300px;
-    animation: stars 120s linear infinite;
-    opacity:0.6;
+        radial-gradient(white 2px, transparent 2px);
+    background-size: 100px 100px, 200px 200px;
+    opacity:0.4;
+    transition:transform 0.2s;
 }
 
-@keyframes stars{
-    from{transform:translate(0,0);}
-    to{transform:translate(-500px,-500px);}
-}
-
-/* 🌌 NEBULOSA */
-body::after{
-    content:"";
+/* ✨ PARTÍCULAS */
+.particle{
     position:absolute;
-    width:100%;
-    height:100%;
-    background:
-    radial-gradient(circle at 30% 30%, rgba(255,0,150,0.2), transparent 40%),
-    radial-gradient(circle at 70% 60%, rgba(0,200,255,0.2), transparent 40%);
-    filter: blur(80px);
+    width:2px;
+    height:2px;
+    background:white;
+    border-radius:50%;
+    animation: floatParticle linear infinite;
+}
+
+@keyframes floatParticle{
+    from{transform:translateY(0);}
+    to{transform:translateY(-100vh);}
+}
+
+/* 🌠 ESTRELLA FUGAZ */
+.shooting-star{
+    position:absolute;
+    width:2px;
+    height:80px;
+    background:linear-gradient(white, transparent);
+    opacity:0;
+    transform:rotate(45deg);
+    animation:shoot 5s linear infinite;
+}
+
+@keyframes shoot{
+    0%{opacity:0; transform:translate(-200px,-200px) rotate(45deg);}
+    10%{opacity:1;}
+    100%{opacity:0; transform:translate(800px,800px) rotate(45deg);}
 }
 
 /* CONTENEDOR */
@@ -57,17 +70,17 @@ body::after{
     z-index:2;
 }
 
-/* 👨‍🚀 ASTRONAUTA */
+/* 👨‍🚀 */
 .astronaut{
     position:absolute;
     top:-160px;
     left:50%;
     transform:translateX(-50%);
     animation: float 4s ease-in-out infinite;
-    filter: drop-shadow(0 0 15px rgba(255,255,255,0.6));
+    filter: drop-shadow(0 0 20px white);
 }
 
-/* GLOBO */
+/* 🎈 */
 .balloon{
     position:absolute;
     right:-30px;
@@ -81,7 +94,7 @@ body::after{
     background:#ff3b6b;
     transform: rotate(-45deg);
     position:relative;
-    box-shadow:0 0 25px #ff3b6b;
+    box-shadow:0 0 30px #ff3b6b;
 }
 
 .heart::before,
@@ -94,8 +107,8 @@ body::after{
     border-radius:50%;
 }
 
-.heart::before{top:-30px;left:0;}
-.heart::after{left:30px;top:0;}
+.heart::before{top:-30px;}
+.heart::after{left:30px;}
 
 .heart span{
     position:absolute;
@@ -113,25 +126,23 @@ body::after{
     margin:auto;
 }
 
-/* TARJETA PRO */
+/* 💌 TARJETA */
 .card{
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(25px);
     background: rgba(255,255,255,0.05);
     border:1px solid rgba(255,255,255,0.2);
     border-radius:20px;
     padding:40px;
     width:320px;
     text-align:center;
-    box-shadow:0 0 50px rgba(0,0,0,0.8);
+    box-shadow:0 0 60px rgba(0,0,0,0.9);
     animation: fade 2s ease;
 }
 
-/* TEXTO */
 .title{
     font-size:2rem;
-    margin-bottom:10px;
     color:#ffd89b;
-    text-shadow:0 0 10px #ffd89b;
+    text-shadow:0 0 15px #ffd89b;
 }
 
 .subtitle{
@@ -165,7 +176,7 @@ body::after{
 
 @keyframes glow{
     0%,100%{text-shadow:0 0 10px #ff6b81;}
-    50%{text-shadow:0 0 30px #ff6b81;}
+    50%{text-shadow:0 0 40px #ff6b81;}
 }
 
 @keyframes fade{
@@ -176,6 +187,23 @@ body::after{
 </head>
 
 <body>
+
+<div class="bg" id="bg"></div>
+
+<!-- 🌠 -->
+<div class="shooting-star" style="top:10%;left:20%;animation-delay:0s;"></div>
+<div class="shooting-star" style="top:30%;left:70%;animation-delay:2s;"></div>
+
+<!-- ✨ PARTÍCULAS -->
+<script>
+for(let i=0;i<40;i++){
+    let p=document.createElement("div");
+    p.className="particle";
+    p.style.left=Math.random()*100+"%";
+    p.style.animationDuration=(5+Math.random()*10)+"s";
+    document.body.appendChild(p);
+}
+</script>
 
 <div class="container">
 
@@ -188,7 +216,6 @@ body::after{
             <rect x="18" y="41" width="28" height="20" rx="10" fill="#e6e6e6"/>
         </svg>
 
-        <!-- 🎈 -->
         <div class="balloon">
             <div class="heart"><span>Te quiero</span></div>
             <div class="string"></div>
@@ -211,6 +238,15 @@ que se compare al arte de mirarte.
     </div>
 
 </div>
+
+<!-- 🖱️ PARALLAX -->
+<script>
+document.addEventListener("mousemove", (e)=>{
+    let x = (e.clientX / window.innerWidth - 0.5) * 20;
+    let y = (e.clientY / window.innerHeight - 0.5) * 20;
+    document.getElementById("bg").style.transform = `translate(${x}px, ${y}px)`;
+});
+</script>
 
 </body>
 </html>
