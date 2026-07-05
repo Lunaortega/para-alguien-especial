@@ -19,7 +19,7 @@ body{
     color:white;
 }
 
-/* 🌌 FONDO */
+/* 🌌 FONDO ESTRELLAS */
 body::before{
     content:"";
     position:absolute;
@@ -29,7 +29,7 @@ body::before{
         radial-gradient(white 1px, transparent 1px),
         radial-gradient(white 2px, transparent 2px);
     background-size: 120px 120px, 240px 240px;
-    animation: stars 120s linear infinite;
+    animation: stars 100s linear infinite;
     opacity:0.5;
 }
 
@@ -38,30 +38,47 @@ body::before{
     to{transform:translate(-400px,-400px);}
 }
 
+/* 🌠 ESTRELLA FUGAZ */
+.shooting-star{
+    position:absolute;
+    top:10%;
+    left:-100px;
+    width:2px;
+    height:80px;
+    background:linear-gradient(white, transparent);
+    transform:rotate(45deg);
+    animation:shoot 6s linear infinite;
+}
+
+@keyframes shoot{
+    0%{left:-100px; opacity:1;}
+    100%{left:110%; opacity:0;}
+}
+
 /* CONTENEDOR */
 .container{
     position:relative;
-    width:350px;
     text-align:center;
+    transform: translateY(-40px);
 }
 
-/* 👨‍🚀 ASTRONAUTA MEJORADO */
+/* 👨‍🚀 ASTRONAUTA */
 .astronaut{
     position:relative;
-    margin-bottom:20px;
+    margin-bottom:15px;
     animation: float 4s ease-in-out infinite;
 }
 
 .astronaut svg{
-    width:90px;
-    filter: drop-shadow(0 0 20px rgba(255,255,255,0.7));
+    width:100px;
+    filter: drop-shadow(0 0 25px rgba(255,255,255,0.8));
 }
 
-/* 🎈 GLOBO BIEN POSICIONADO */
+/* 🎈 GLOBO */
 .balloon{
     position:absolute;
-    top:-60px;
-    right:-20px;
+    top:-50px;
+    right:-10px;
     animation: floatBalloon 3s ease-in-out infinite alternate;
 }
 
@@ -71,7 +88,7 @@ body::before{
     background:#ff3b6b;
     transform: rotate(-45deg);
     position:relative;
-    box-shadow:0 0 25px #ff3b6b;
+    box-shadow:0 0 30px #ff3b6b;
 }
 
 .heart::before,
@@ -98,9 +115,10 @@ body::before{
 
 .string{
     width:2px;
-    height:50px;
+    height:55px;
     background:white;
     margin:auto;
+    transform: rotate(10deg);
 }
 
 /* 💌 TARJETA */
@@ -114,10 +132,11 @@ body::before{
     animation: fade 2s ease;
 }
 
+/* TEXTO */
 .title{
     font-size:2rem;
     color:#ffd89b;
-    text-shadow:0 0 15px #ffd89b;
+    text-shadow:0 0 20px #ffd89b;
     margin-bottom:10px;
 }
 
@@ -132,11 +151,14 @@ body::before{
     white-space:pre-line;
 }
 
+/* 💥 EFECTO WOW */
 .highlight{
     color:#ff6b81;
     font-size:1.6rem;
     font-weight:bold;
-    animation: glow 2s infinite;
+    opacity:0;
+    animation: reveal 2s ease forwards;
+    animation-delay:1.5s;
 }
 
 /* ANIMACIONES */
@@ -150,13 +172,13 @@ body::before{
     to{transform:translateY(-8px);}
 }
 
-@keyframes glow{
-    0%,100%{text-shadow:0 0 10px #ff6b81;}
-    50%{text-shadow:0 0 30px #ff6b81;}
+@keyframes reveal{
+    from{opacity:0; transform:translateY(20px);}
+    to{opacity:1; transform:translateY(0);}
 }
 
 @keyframes fade{
-    from{opacity:0;transform:translateY(20px);}
+    from{opacity:0;transform:translateY(30px);}
     to{opacity:1;}
 }
 </style>
@@ -164,23 +186,22 @@ body::before{
 
 <body>
 
+<!-- 🌠 -->
+<div class="shooting-star"></div>
+
 <div class="container">
 
     <!-- 👨‍🚀 -->
     <div class="astronaut">
         <svg viewBox="0 0 64 64">
-            <!-- casco -->
-            <circle cx="32" cy="22" r="14" fill="#eaeaea"/>
-            <circle cx="32" cy="22" r="8" fill="#4fc3f7"/>
-            <!-- cuerpo -->
+            <circle cx="32" cy="22" r="15" fill="#eaeaea"/>
+            <circle cx="32" cy="22" r="9" fill="#4fc3f7"/>
             <rect x="22" y="36" width="20" height="18" rx="10" fill="#eaeaea"/>
-            <!-- brazos -->
-            <rect x="10" y="38" width="10" height="6" rx="3" fill="#ccc"/>
-            <rect x="44" y="38" width="10" height="6" rx="3" fill="#ccc"/>
-
-            <!-- 🎈 -->
+            <rect x="12" y="38" width="10" height="6" rx="3" fill="#ccc"/>
+            <rect x="42" y="38" width="10" height="6" rx="3" fill="#ccc"/>
         </svg>
 
+        <!-- 🎈 -->
         <div class="balloon">
             <div class="heart"><span>Te quiero</span></div>
             <div class="string"></div>
